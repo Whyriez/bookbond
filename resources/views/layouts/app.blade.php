@@ -14,30 +14,30 @@
     <script src="https://cdn.datatables.net/2.3.0/js/dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.0/css/dataTables.dataTables.min.css">
 
-    
+
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet" />
 
     <style>
-  /* Add these styles to constrain the editor width */
-  .ck-editor, 
-  .ck-editor__editable, 
-  .ck-editor__main, 
-  .ck-toolbar,
-  .ck-toolbar__items,
-  .ck-content,
-  .ck.ck-editor__editable_inline {
-    max-width: 100% !important;
-    width: 100% !important;
-    overflow-x: hidden !important;
-  }
-  
-  /* Ensure the toolbar items wrap properly */
-  .ck-toolbar__items {
-    flex-wrap: wrap !important;
-  }
-</style>
+        /* Add these styles to constrain the editor width */
+        .ck-editor,
+        .ck-editor__editable,
+        .ck-editor__main,
+        .ck-toolbar,
+        .ck-toolbar__items,
+        .ck-content,
+        .ck.ck-editor__editable_inline {
+            max-width: 100% !important;
+            width: 100% !important;
+            overflow-x: hidden !important;
+        }
+
+        /* Ensure the toolbar items wrap properly */
+        .ck-toolbar__items {
+            flex-wrap: wrap !important;
+        }
+    </style>
 
 
     <style>
@@ -726,10 +726,10 @@
 </head>
 
 <body class="book-pattern min-h-screen">
-    <div class="flex">
+    <div class="flex h-screen overflow-hidden">
         @include('components.landing.sidebar')
         <!-- Main Content -->
-        <div class="flex-1">
+        <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Mobile Header -->
             <header class="md:hidden bg-white p-4 sticky top-0 z-30 shadow-sm">
                 <div class="flex justify-between items-center">
@@ -751,12 +751,13 @@
                     </div>
 
                     <div class="w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center">
-                        <span class="text-violet-600 font-medium">{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</span>
+                        <span
+                            class="text-violet-600 font-medium">{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</span>
                     </div>
                 </div>
             </header>
 
-            <div class="p-4 md:p-8">
+            <div class="flex-1 overflow-y-auto p-4 md:p-8">
                 @yield('content')
 
                 <!-- Footer -->
@@ -823,7 +824,7 @@
             });
 
             overlay.addEventListener('click', function() {
-                   sidebar.classList.add('-translate-x-full');
+                sidebar.classList.add('-translate-x-full');
                 sidebar.classList.remove('open');
                 overlay.classList.remove('active');
                 overlay.classList.add('hidden');
