@@ -18,6 +18,18 @@
         </div>
     </div>
 
+     @if (session('success'))
+            <div class="mb-4 rounded-md bg-green-100 p-4 text-sm text-green-700">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="mb-4 rounded-md bg-red-100 p-4 text-sm text-red-700">
+                {{ session('error') }}
+            </div>
+        @endif
+
     <!-- Book Recommendations -->
     <div class="mb-8">
         <div class="overflow-x-auto">
@@ -52,11 +64,11 @@
                         <td class="px-4 py-2">{{ $book->{'ISBN-10'} }}</td>
                         <td class="px-4 py-2">{{ $book->{'ISBN-13'} }}</td>
                         <td class="px-4 py-2">
-                            @foreach ($book->categories as $cat)
-                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-1">
-                                    {{ $cat->name }}
-                                </span>
-                            @endforeach
+                          @foreach ($book->categories as $cat)
+        <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-1 mb-1">
+            {{ $cat->name }}
+        </span>
+    @endforeach
                         </td>
                         <td class="px-4 py-2">
                             <button class="edit-book-btn text-blue-500" data-book-id="{{ $book->id }}">Edit</button>
@@ -159,13 +171,13 @@
                 <form id="create-books-form" action="{{ route('admin.books.store') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
-                    <div class="modal-form overflow-y-auto max-h-[70vh]">
+                    <div class="modal-form p-2 overflow-y-auto max-h-[70vh]">
                         <!-- Book Name -->
                         <div class="mb-4">
                             <label for="books-name" class="block text-sm font-medium text-gray-700 mb-1">Nama Buku</label>
                             <input type="text" id="books-name" name="name"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter book name" required>
+                                placeholder="Masukkan nama buku" required>
                         </div>
 
                         <!-- Author -->
@@ -173,7 +185,7 @@
                             <label for="books-author" class="block text-sm font-medium text-gray-700 mb-1">Pengarang</label>
                             <input type="text" id="books-author" name="author"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter author's name" required>
+                                placeholder="Masukkan nama penulis" required>
                         </div>
 
                         <!-- Publisher -->
@@ -182,7 +194,7 @@
                                 class="block text-sm font-medium text-gray-700 mb-1">Penerbit</label>
                             <input type="text" id="books-publisher" name="publisher"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter publisher name" required>
+                                placeholder="Masukkan nama penerbit" required>
                         </div>
 
                         <!-- Publication Date -->
@@ -199,14 +211,14 @@
                                 class="block text-sm font-medium text-gray-700 mb-1">Bahasa</label>
                             <input type="text" id="books-language" name="language"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter language" required>
+                                placeholder="Masukkan bahasa" required>
                         </div>
                         <!-- Print Lenght -->
                         <div class="mb-4">
                             <label for="print_length" class="block text-sm font-medium text-gray-700 mb-1">Panjang Cetak</label>
-                            <input type="text" id="print_length" name="print_length"
+                            <input type="number" id="print_length" name="print_length"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter print length" required>
+                                placeholder="Masukkan panjang cetak" required>
                         </div>
 
                         <!-- ISBN-10 -->
@@ -214,7 +226,7 @@
                             <label for="isbn-10" class="block text-sm font-medium text-gray-700 mb-1">ISBN-10</label>
                             <input type="text" id="isbn-10" name="ISBN-10"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter ISBN-10" required>
+                                placeholder="Masukkan ISBN-10" required>
                         </div>
 
                         <!-- ISBN-13 -->
@@ -222,7 +234,7 @@
                             <label for="isbn-13" class="block text-sm font-medium text-gray-700 mb-1">ISBN-13</label>
                             <input type="text" id="isbn-13" name="ISBN-13"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter ISBN-13" required>
+                                placeholder="Masukkan ISBN-13" required>
                         </div>
 
                         <!-- Description -->
@@ -231,7 +243,7 @@
                                 class="block text-sm font-medium text-gray-700 mb-1">Keterangan</label>
                             <textarea id="books-description" name="description" rows="4"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter book description" required></textarea>
+                                placeholder="Masukkan deskripsi buku" required></textarea>
                         </div>
 
                         <!-- Category (Genres) -->
@@ -275,7 +287,7 @@
 
                     <div class="flex justify-end">
                         <button type="button" id="cancel-create"
-                            class="btn-secondary px-4 py-2 rounded-md mr-2">Membatalkan</button>
+                            class="btn-secondary px-4 py-2 rounded-md mr-2">Batal</button>
                         <button type="submit" class="btn-primary px-4 py-2 rounded-md">Buat Buku</button>
                     </div>
                 </form>
@@ -300,13 +312,13 @@
                 <form id="edit-books-form" action="" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="modal-form overflow-y-auto max-h-[70vh]">
+                    <div class="modal-form p-2 overflow-y-auto max-h-[70vh]">
                         <!-- Book Name -->
                         <div class="mb-4">
                             <label for="edit-books-name" class="block text-sm font-medium text-gray-700 mb-1">Nama Buku</label>
                             <input type="text" id="edit-books-name" name="name"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter book name" required>
+                                placeholder="Masukkan nama buku" required>
                         </div>
 
                         <!-- Author -->
@@ -315,7 +327,7 @@
                                 class="block text-sm font-medium text-gray-700 mb-1">Pengarang</label>
                             <input type="text" id="edit-books-author" name="author"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter author's name" required>
+                                placeholder="Masukkan nama penulis" required>
                         </div>
 
                         <!-- Publisher -->
@@ -324,7 +336,7 @@
                                 class="block text-sm font-medium text-gray-700 mb-1">Penerbit</label>
                             <input type="text" id="edit-books-publisher" name="publisher"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter publisher name" required>
+                                placeholder="Masukkan nama penerbit" required>
                         </div>
 
                         <!-- Publication Date -->
@@ -342,15 +354,15 @@
                                 class="block text-sm font-medium text-gray-700 mb-1">Bahasa</label>
                             <input type="text" id="edit-books-language" name="language"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter language" required>
+                                placeholder="Masukkan bahasa" required>
                         </div>
 
                         <!-- Print Length -->
                         <div class="mb-4">
                             <label for="edit-print_length" class="block text-sm font-medium text-gray-700 mb-1">Panjang Cetak</label>
-                            <input type="text" id="edit-print_length" name="print_length"
+                            <input type="number" id="edit-print_length" name="print_length"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter print length" required>
+                                placeholder="Masukkan panjang cetak" required>
                         </div>
 
                         <!-- ISBN-10 -->
@@ -358,7 +370,7 @@
                             <label for="edit-isbn-10" class="block text-sm font-medium text-gray-700 mb-1">ISBN-10</label>
                             <input type="text" id="edit-isbn-10" name="ISBN-10"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter ISBN-10" required>
+                                placeholder="Masukkan ISBN-10" required>
                         </div>
 
                         <!-- ISBN-13 -->
@@ -366,7 +378,7 @@
                             <label for="edit-isbn-13" class="block text-sm font-medium text-gray-700 mb-1">ISBN-13</label>
                             <input type="text" id="edit-isbn-13" name="ISBN-13"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter ISBN-13" required>
+                                placeholder="Masukkan ISBN-13" required>
                         </div>
 
                         <!-- Description -->
@@ -375,7 +387,7 @@
                                 class="block text-sm font-medium text-gray-700 mb-1">Keterangan</label>
                             <textarea id="edit-books-description" name="description" rows="4"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                placeholder="Enter book description" required></textarea>
+                                placeholder="Masukkan deskripsi buku" required></textarea>
                         </div>
 
                         <!-- Category (Genres) -->

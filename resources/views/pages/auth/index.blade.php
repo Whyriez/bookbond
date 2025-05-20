@@ -206,7 +206,7 @@
                         </div>
                         <input type="password" id="password" name="password"
                             class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none"
-                            placeholder="Enter your password" required>
+                            placeholder="Masukkan kata sandi Anda" required>
                     </div>
 
                     <div class="flex items-center">

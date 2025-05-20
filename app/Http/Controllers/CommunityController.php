@@ -124,11 +124,11 @@ class CommunityController extends Controller
 
             $community->users()->attach(Auth::user()->id);
 
-            return redirect()->route('home.community.index')->with('success', 'Community created successfully.');
+            return redirect()->route('home.community.index')->with('success', 'Komunitas berhasil dibuat.');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
-                ->with('error', 'Failed to create community. Please try again. Error: ' . $e->getMessage());
+                ->with('error', 'Gagal membuat komunitas. Silakan coba lagi. Kesalahan: ' . $e->getMessage());
         }
     }
 
@@ -145,7 +145,7 @@ class CommunityController extends Controller
             $community->categories()->sync($request->categories);
         }
 
-        return redirect()->back()->with('success', 'Community updated successfully!');
+        return redirect()->back()->with('success', 'Komunitas berhasil diperbarui!');
     }
 
     public function show($id)
@@ -200,7 +200,7 @@ class CommunityController extends Controller
             $community->users()->attach($user->id);
         }
 
-        return redirect()->back()->with('success', 'You have joined the community!');
+        return redirect()->back()->with('success', 'Anda telah bergabung dengan komunitas!');
     }
 
     public function leave(Community $community)
@@ -210,7 +210,7 @@ class CommunityController extends Controller
             $community->users()->detach($user->id);
         }
 
-        return redirect()->back()->with('success', 'You have left the community.');
+        return redirect()->back()->with('success', 'Anda telah meninggalkan komunitas.');
     }
 
 
@@ -219,6 +219,6 @@ class CommunityController extends Controller
         $community = Community::findOrFail($id);
         $community->delete();
 
-        return redirect()->back()->with('success', 'Community deleted successfully!');
+        return redirect()->back()->with('success', 'Komunitas berhasil dihapus!');
     }
 }

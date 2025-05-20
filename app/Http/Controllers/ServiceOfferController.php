@@ -16,7 +16,10 @@ class ServiceOfferController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'service-name' => 'required|string|max:255',
+            'service-name' => 'required|string|max:255|unique:service_offer,name',
+        ], [
+            'service-name.required' => 'Nama layanan wajib diisi.',
+            'service-name.unique' => 'Nama layanan sudah terdaftar.',
         ]);
 
         try {
@@ -24,26 +27,27 @@ class ServiceOfferController extends Controller
                 'name' => $request->input('service-name'),
             ]);
 
-            return redirect()->back()->with('success', 'Service Offer created successfully.');
+            return redirect()->back()->with('success', 'Penawaran Layanan berhasil dibuat.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to create Service Offer. Please try again.');
+            return redirect()->back()->with('error', 'Gagal membuat Service Offer. Silakan coba lagi.');
         }
     }
 
+
     public function update(Request $request, $id)
     {
-         $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
         ]);
-         try {
-             $service = ServiceOffer::findOrFail($id);
-        $service->update([
-            'name' => $request->input('name'),
-        ]);
+        try {
+            $service = ServiceOffer::findOrFail($id);
+            $service->update([
+                'name' => $request->input('name'),
+            ]);
 
-            return redirect()->back()->with('success', 'Service Offer updated successfully.');
+            return redirect()->back()->with('success', 'Penawaran Layanan berhasil diperbarui.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to update Service Offer. Please try again.');
+            return redirect()->back()->with('error', 'Gagal memperbarui Penawaran Layanan. Silakan coba lagi.');
         }
     }
 
@@ -52,6 +56,6 @@ class ServiceOfferController extends Controller
         $service = ServiceOffer::findOrFail($id);
         $service->delete();
 
-        return redirect()->back()->with('success', 'Service Offer deleted successfully.');
+        return redirect()->back()->with('success', 'Penawaran Layanan berhasil dihapus.');
     }
 }

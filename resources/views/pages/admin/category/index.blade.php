@@ -18,70 +18,87 @@
         </div>
     </div>
 
+    @if (session('success'))
+        <div class="mb-4 rounded-md bg-green-100 p-4 text-sm text-green-700">
+            {{ session('success') }}
+        </div>
+    @endif
+    @error('category-name')
+        <div class="mb-4 rounded-md bg-red-100 p-4 text-sm text-red-700">
+            {{ $message }}
+        </div>
+    @enderror
+    @if (session('error'))
+        <div class="mb-4 rounded-md bg-red-100 p-4 text-sm text-red-700">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="mb-8">
-    <!-- Desktop/tablet view -->
-    <div class="hidden md:block">
-        <table id="example" class="min-w-full divide-y divide-gray-200 border border-gray-300 rounded-md">
-            <thead class="bg-violet-600 text-white">
-                <tr>
-                    <th class="px-4 py-2 text-left text-sm font-semibold">Nama</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold">Aksi</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200 text-sm">
-                @foreach ($data as $category)
+        <!-- Desktop/tablet view -->
+        <div class="hidden md:block">
+            <table id="example" class="min-w-full divide-y divide-gray-200 border border-gray-300 rounded-md">
+                <thead class="bg-violet-600 text-white">
                     <tr>
-                        <td class="px-4 py-2">{{ $category->name }}</td>
-                        <td class="px-4 py-2">
-                            <a href="#" class="text-violet-600 hover:underline mr-2 edit-btn"
-                                data-id="{{ $category->id }}" data-name="{{ $category->name }}">
+                        <th class="px-4 py-2 text-left text-sm font-semibold">Nama</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200 text-sm">
+                    @foreach ($data as $category)
+                        <tr>
+                            <td class="px-4 py-2">{{ $category->name }}</td>
+                            <td class="px-4 py-2">
+                                <a href="#" class="text-violet-600 hover:underline mr-2 edit-btn"
+                                    data-id="{{ $category->id }}" data-name="{{ $category->name }}">
+                                    Edit
+                                </a>
+
+                                <form action="{{ route('admin.book.category.destroy', $category->id) }}" method="POST"
+                                    class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('Yakin ingin menghapus?')"
+                                        class="text-red-600 hover:underline">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Mobile view -->
+        <div class="md:hidden">
+            <div class="bg-violet-600 text-white rounded-t-md px-4 py-2 font-semibold">
+                Daftar Kategori
+            </div>
+            <div class="divide-y divide-gray-200 border-x border-b border-gray-300 rounded-b-md">
+                @foreach ($data as $category)
+                    <div class="bg-white p-4 flex justify-between items-center">
+                        <div class="font-medium">{{ $category->name }}</div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-violet-600 edit-btn" data-id="{{ $category->id }}"
+                                data-name="{{ $category->name }}">
                                 Edit
                             </a>
 
-                            <form action="{{ route('admin.book.category.destroy', $category->id) }}" method="POST" class="inline">
+                            <form action="{{ route('admin.book.category.destroy', $category->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" onclick="return confirm('Yakin ingin menghapus?')"
-                                    class="text-red-600 hover:underline">
+                                    class="text-red-600">
                                     Delete
                                 </button>
                             </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Mobile view -->
-    <div class="md:hidden">
-        <div class="bg-violet-600 text-white rounded-t-md px-4 py-2 font-semibold">
-            Daftar Kategori
-        </div>
-        <div class="divide-y divide-gray-200 border-x border-b border-gray-300 rounded-b-md">
-            @foreach ($data as $category)
-                <div class="bg-white p-4 flex justify-between items-center">
-                    <div class="font-medium">{{ $category->name }}</div>
-                    <div class="flex space-x-3">
-                        <a href="#" class="text-violet-600 edit-btn"
-                            data-id="{{ $category->id }}" data-name="{{ $category->name }}">
-                            Edit
-                        </a>
-
-                        <form action="{{ route('admin.book.category.destroy', $category->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('Yakin ingin menghapus?')"
-                                class="text-red-600">
-                                Delete
-                            </button>
-                        </form>
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
-</div>
 
     <div id="create-books-modal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
         <div class="modal-overlay absolute inset-0 bg-black opacity-50"></div>

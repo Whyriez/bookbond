@@ -107,6 +107,15 @@
         .book-icon {
             fill: #5046e5;
         }
+
+        .no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+}
     </style>
 </head>
 
@@ -333,6 +342,8 @@
             mobileMenu.classList.toggle('hidden');
         });
     </script>
+
+    @stack('scripts')
 </body>
 
 </html>

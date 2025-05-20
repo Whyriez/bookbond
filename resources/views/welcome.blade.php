@@ -131,11 +131,12 @@
                             <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Create Your Profile</h3>
+                    <h3 class="text-xl font-bold mb-3">Buat Profil Anda</h3>
                     <p class="text-gray-600 mb-4">
                         Ceritakan kepada kami tentang preferensi bacaan Anda, genre favorit, dan buku yang Anda nikmati.
                     </p>
-                    <a href="#" class="text-indigo-600 font-medium hover:text-indigo-800 inline-flex items-center">
+                    <a href="{{ route('register') }}"
+                        class="text-indigo-600 font-medium hover:text-indigo-800 inline-flex items-center">
                         Ayo Mulai
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -333,7 +334,7 @@
                                 <p class="text-gray-700 text-sm mb-4 line-clamp-3">{{ $book->description }}</p>
 
                                 <div class="flex justify-between items-center">
-                                
+
                                     <a href="{{ route('home.book.detail', $book->id) }}"
                                         class="btn-outline px-3 py-1.5 rounded-md text-sm">
                                         Lihat Detail
@@ -438,5 +439,6 @@
         </div>
     </section>
 
+  
 
 @endsection

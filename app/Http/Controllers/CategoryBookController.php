@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class CategoryBookController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = CategoryBook::all();
         return view('pages.admin.category.index', compact('data'));
     }
@@ -15,15 +16,19 @@ class CategoryBookController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category-name' => 'required|string|max:255',
+            'category-name' => 'required|string|max:255|unique:category_book,name',
+        ], [
+            'category-name.unique' => 'Kategori ini sudah ada.',
         ]);
+
 
         CategoryBook::create([
             'name' => $request->input('category-name'),
         ]);
 
-        return redirect()->back()->with('success', 'Category created successfully.');
+        return redirect()->back()->with('success', 'Kategori berhasil dibuat.');
     }
+
 
     public function update(Request $request, $id)
     {
@@ -36,7 +41,7 @@ class CategoryBookController extends Controller
             'name' => $request->input('name'),
         ]);
 
-        return redirect()->back()->with('success', 'Category updated successfully.');
+        return redirect()->back()->with('success', 'Kategori berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -44,6 +49,6 @@ class CategoryBookController extends Controller
         $category = CategoryBook::findOrFail($id);
         $category->delete();
 
-        return redirect()->back()->with('success', 'Category deleted successfully.');
+        return redirect()->back()->with('success', 'Kategori berhasil dihapus.');
     }
 }

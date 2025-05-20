@@ -98,7 +98,7 @@
                                 class="want-to-read-btn px-3 py-1 rounded-full text-sm font-medium shadow-md
                                 {{ $isAdded ? 'added bg-violet-600 text-white' : 'bg-white text-violet-600 hover:bg-violet-50' }}"
                                 data-book-id="{{ $book->id }}">
-                                {!! $isAdded ? '<i class="fas fa-check mr-1"></i> Added' : '<i class="fas fa-bookmark mr-1"></i> Want to Read' !!}
+                                {!! $isAdded ? '<i class="fas fa-check mr-1"></i> Ditambahkan' : '<i class="fas fa-bookmark mr-1"></i> Ingin Membaca' !!}
                             </button>
                         </div>
 

@@ -198,7 +198,7 @@
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
                         <input type="text" id="name" name="name"
                             class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none"
-                            placeholder="Enter your name" required>
+                            placeholder="Masukkan nama Anda" required>
                     </div>
 
                     <div>
@@ -212,7 +212,7 @@
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Kata sandi</label>
                         <input type="password" id="password" name="password"
                             class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none"
-                            placeholder="Create a password" required minlength="8">
+                            placeholder="Buat kata sandi" required minlength="8">
                         <p class="text-xs text-gray-500 mt-1">Harus minimal 8 karakter</p>
                     </div>
 

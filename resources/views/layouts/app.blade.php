@@ -844,6 +844,10 @@
             //     overlay.classList.remove('active');
             // });
         });
+
+        
     </script>
+
+     @stack('scripts')
 
 </html>

@@ -44,7 +44,7 @@ class WelcomeController extends Controller
             return $community;
         });
 
-        $books = Books::with('categories')->take(5)->get();
+        $books = Books::with('categories')->take(3)->get();
         $bookStore = DetailPartner::with('bookCategories', 'serviceOffers')->take(3)->get();
 
         return view('welcome', compact('books', 'allCommunities', 'bookStore'));

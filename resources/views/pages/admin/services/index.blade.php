@@ -25,6 +25,11 @@
             </div>
         @endif
 
+        @error('service-name')
+            <div class="mb-4 rounded-md bg-red-100 p-4 text-sm text-red-700">
+                {{ $message }}
+            </div>
+        @enderror
         @if (session('error'))
             <div class="mb-4 rounded-md bg-red-100 p-4 text-sm text-red-700">
                 {{ session('error') }}
@@ -84,7 +89,7 @@
                         <label for="books-name" class="block text-sm font-medium text-gray-700 mb-1">Nama Layanan</label>
                         <input type="text" id="books-name"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                            placeholder="Enter category name" name="service-name" required>
+                            placeholder="Masukkan nama layanan" name="service-name" required>
                     </div>
 
                     <div class="flex justify-end">
@@ -139,7 +144,7 @@
             const cancelCreateBtn = document.getElementById('cancel-create');
             const modalContent = document.querySelector('.modal-content');
 
-            function openModal() { 
+            function openModal() {
                 createBooksModal.classList.remove('hidden');
                 setTimeout(() => {
                     modalContent.classList.remove('scale-95', 'opacity-0');

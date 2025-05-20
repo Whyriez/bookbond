@@ -67,7 +67,7 @@ class BooksController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.books.index')->with('success', 'Book created successfully!');
+        return redirect()->route('admin.books.index')->with('success', 'Buku berhasil dibuat!');
     }
 
     public function update(Request $request, $id)
@@ -117,7 +117,7 @@ class BooksController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.books.index')->with('success', 'Book updated successfully!');
+        return redirect()->route('admin.books.index')->with('success', 'Buku berhasil diubah!');
     }
 
     public function showDetail($id)
